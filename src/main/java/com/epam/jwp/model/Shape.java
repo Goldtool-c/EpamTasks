@@ -1,9 +1,10 @@
 package com.epam.jwp.model;
 import com.epam.jwp.exceptions.ShapeDoesNotExistException;
+import com.epam.jwp.strategy.ThisShapeStrategy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public abstract class Shape {
+public abstract class Shape implements ThisShapeStrategy {
     protected Point[] points;
     protected int n;
     protected static final Logger LOGGER = LogManager.getLogger(Shape.class);
@@ -58,7 +59,7 @@ public abstract class Shape {
         }
     }
 
-    public abstract boolean isThisShape();
+   //public abstract boolean isThisShape();
 
     //public abstract boolean isLine();
 }

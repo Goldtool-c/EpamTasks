@@ -1,8 +1,10 @@
 package com.epam.jwp.model;
 
+import com.epam.jwp.strategy.ThisShapeStrategy;
+
 import java.util.Scanner;
 
-public class Square extends Shape {
+public class Square extends Shape implements ThisShapeStrategy {
 
     public Square(Point []points1) {
         n=4;
@@ -31,7 +33,6 @@ public class Square extends Shape {
             this.setPoint(i, x, y);
         }
     }
-    @Override
     public boolean isThisShape() {
         boolean isSquare = false;
         boolean[] squares = new boolean[4];

@@ -1,8 +1,10 @@
 package com.epam.jwp.model;
 
+import com.epam.jwp.strategy.ThisShapeStrategy;
+
 import java.util.Scanner;
 
-public class Triangle extends Shape{
+public class Triangle extends Shape implements ThisShapeStrategy {
     public Triangle(Point[] points1) {
         n=3;
         points = new Point[n];
@@ -30,7 +32,6 @@ public class Triangle extends Shape{
         }
 
     }
-    @Override
     public boolean isThisShape()
     {
         boolean isTriangle=true;

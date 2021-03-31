@@ -1,8 +1,10 @@
 package com.epam.jwp.model;
 
+import com.epam.jwp.strategy.ThisShapeStrategy;
+
 import java.util.Scanner;
 
-public class Line extends Shape {
+public class Line extends Shape implements ThisShapeStrategy {
     public Line(Point[] points1)
     {
         n=2;
@@ -29,7 +31,6 @@ public class Line extends Shape {
             this.setPoint(i, x, y);
         }
     }
-    @Override
     public boolean isThisShape()
     {
         boolean isLine=true;
