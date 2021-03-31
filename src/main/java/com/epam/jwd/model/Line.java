@@ -1,6 +1,6 @@
-package com.epam.jwp.model;
+package com.epam.jwd.model;
 
-import com.epam.jwp.strategy.ThisShapeStrategy;
+import com.epam.jwd.strategy.ThisShapeStrategy;
 
 import java.util.Scanner;
 
