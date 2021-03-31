@@ -1,4 +1,5 @@
 package com.epam.jwp.model;
+import com.epam.jwp.exceptions.ShapeDoesNotExistException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
