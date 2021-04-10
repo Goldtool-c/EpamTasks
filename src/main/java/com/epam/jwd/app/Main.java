@@ -1,6 +1,7 @@
 package com.epam.jwd.app;
 
-import com.epam.jwd.exceptions.ShapeDoesNotExistException;
+import com.epam.jwd.exception.ShapeDoesNotExistException;
+import com.epam.jwd.factory.ShapeFactory;
 import com.epam.jwd.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,13 +25,13 @@ public class Main {
             case 1:
             {
                 for (int i = 0; i < 2; i++) {
-                    lines[i] = ShapeFactory.createShape(ShapeType.LINE);
-                    triangles[i] = ShapeFactory.createShape(ShapeType.TRIANGLE);
+                    lines[i] = ShapeFactory.createDefaultShape(ShapeType.LINE);
+                    triangles[i] = ShapeFactory.createDefaultShape(ShapeType.TRIANGLE);
                 }
                 for (int i = 0; i < 4; i++) {
                     points[i]=new Point();
                 }
-                squares[0]=ShapeFactory.createShape(ShapeType.SQUARE);
+                squares[0]=ShapeFactory.createDefaultShape(ShapeType.SQUARE);
                 break;
             }
             default:

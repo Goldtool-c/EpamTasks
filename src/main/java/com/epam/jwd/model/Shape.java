@@ -1,5 +1,5 @@
 package com.epam.jwd.model;
-import com.epam.jwd.exceptions.ShapeDoesNotExistException;
+import com.epam.jwd.exception.ShapeDoesNotExistException;
 import com.epam.jwd.strategy.ThisShapeStrategy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
