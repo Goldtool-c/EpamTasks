@@ -1,10 +1,10 @@
 package com.epam.jwd.model;
 
-import com.epam.jwd.strategy.ThisShapeStrategy;
+import com.epam.jwd.strategy.ShapeStrategy;
 
 import java.util.Scanner;
 
-public class Square extends Shape implements ThisShapeStrategy {
+public class Square extends Shape implements ShapeStrategy {
 
     public Square(Point []points1) {
         n=4;
@@ -33,41 +33,14 @@ public class Square extends Shape implements ThisShapeStrategy {
             this.setPoint(i, x, y);
         }
     }
-    public boolean isThisShape() {
-        boolean isSquare = false;
-        boolean[] squares = new boolean[4];
-        n=4;
-        int counterX = 0;
-        int counterY = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if(points[i].getX()==points[j].getX())
-                {
-                    counterX++;
-                }
-                if(points[i].getY()==points[j].getY())
-                {
-                    counterY++;
-                }
-            }
-            if(counterX==2&&counterY==2)
-            {
-                counterX=0;
-                counterY=0;
-                squares[i]=true;
-            }
-        }
-        counterX=0;
-        for (int i = 0; i < n; i++) {
-            if(squares[i])
-            {
-                counterX++;
-            } else {break;}
-        }
-        if(counterX==4)
-        {
-            isSquare=true;
-        }
-        return isSquare;
+
+    @Override
+    public double getPerimeter() {
+        return 0;
+    }
+
+    @Override
+    public double getSquare() {
+        return 0;
     }
 }

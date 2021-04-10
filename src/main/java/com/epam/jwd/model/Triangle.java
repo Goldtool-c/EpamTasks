@@ -1,10 +1,10 @@
 package com.epam.jwd.model;
 
-import com.epam.jwd.strategy.ThisShapeStrategy;
+import com.epam.jwd.strategy.ShapeStrategy;
 
 import java.util.Scanner;
 
-public class Triangle extends Shape implements ThisShapeStrategy {
+public class Triangle extends Shape implements ShapeStrategy {
     public Triangle(Point[] points1) {
         n=3;
         points = new Point[n];
@@ -32,19 +32,14 @@ public class Triangle extends Shape implements ThisShapeStrategy {
         }
 
     }
-    public boolean isThisShape()
-    {
-        boolean isTriangle=true;
-        double k, b;
-        k=(points[0].getY()-points[1].getY())/(points[0].getX()-points[1].getX());
-        b=points[0].getY()-(k*points[0].getX());
-        double left = points[2].getY();
-        double right = points[2].getX()*k+b;
-        if(Math.abs(left-right)<0.00001)
-        {
-            isTriangle=false;
-        }
-        return isTriangle;
+
+    @Override
+    public double getPerimeter() {
+        return 0;
     }
 
+    @Override
+    public double getSquare() {
+        return 0;
+    }
 }

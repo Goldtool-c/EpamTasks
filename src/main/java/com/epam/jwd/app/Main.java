@@ -1,8 +1,11 @@
 package com.epam.jwd.app;
 
+import com.epam.jwd.exception.InvalidShapeException;
 import com.epam.jwd.exception.ShapeDoesNotExistException;
 import com.epam.jwd.factory.ShapeFactory;
 import com.epam.jwd.model.*;
+import com.epam.jwd.validator.PointsValidator;
+import com.epam.jwd.validator.ShapeValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,7 +13,7 @@ import java.util.Scanner;
 
 public class Main {
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
-    public static void main(String[] args) throws ShapeDoesNotExistException {
+    public static void main(String[] args){
         LOGGER.info("Program started");
         Point[] points=new Point[4];
         Shape[] lines = new Line[2];
@@ -53,8 +56,32 @@ public class Main {
             LOGGER.info(i+1+"st point:"+points[i]);
             i++;
         }while (i<4);
-        Shape.printShape(lines);
-        Shape.printShape(triangles);
-        Shape.printShape(squares);
+        for (int j = 0; j < 2; j++)
+        {
+            try {
+                PointsValidator.pointsValid(ShapeType.LINE, lines[j].getPoints());
+                ShapeValidator.valid(ShapeType.LINE, lines[j].getPoints());
+                LOGGER.info(lines[j]);
+            } catch (InvalidShapeException e) {
+             LOGGER.error("Shape "+j+1+" is not a line");
+            }
+        }
+        for (int j = 0; j < 2; j++)
+        {
+            try {
+                PointsValidator.pointsValid(ShapeType.TRIANGLE, triangles[j].getPoints());
+                ShapeValidator.valid(ShapeType.TRIANGLE, triangles[j].getPoints());
+                LOGGER.info(triangles[j]);
+            } catch (InvalidShapeException e) {
+                LOGGER.error("Shape "+j+1+" is not a triangle");
+            }
+        }
+        try {
+            PointsValidator.pointsValid(ShapeType.TRIANGLE, squares[0].getPoints());
+            ShapeValidator.valid(ShapeType.TRIANGLE, squares[0].getPoints());
+            LOGGER.info(squares[0]);
+        } catch (InvalidShapeException e) {
+            LOGGER.error("Shape "+1+" is not a square");
+        }
     }
 }

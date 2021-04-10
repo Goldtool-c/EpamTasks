@@ -1,15 +1,15 @@
 package com.epam.jwd.validator;
 
+import com.epam.jwd.exception.InvalidShapeException;
 import com.epam.jwd.model.Point;
 import com.epam.jwd.model.ShapeType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.awt.*;
 
-public class ShapeValidator implements ShapePostProcessor {
+public class ShapeValidator{
     private static final Logger LOGGER = LogManager.getLogger(ShapeValidator.class);
-    private boolean isLine(Point[] points)
+    private static boolean isLine(Point[] points)
     {
         boolean isLine=true;
         if(points[0].equals(points[1]))
@@ -18,7 +18,7 @@ public class ShapeValidator implements ShapePostProcessor {
         }
         return isLine;
     }
-    private boolean isTriangle(Point[] points)
+    private static boolean isTriangle(Point[] points)
     {
         boolean isTriangle=true;
         double k, b;
@@ -32,7 +32,7 @@ public class ShapeValidator implements ShapePostProcessor {
         }
         return isTriangle;
     }
-    private boolean isSquare(Point[] points)
+    private static boolean isSquare(Point[] points)
     {
         boolean isSquare = false;
         boolean[] squares = new boolean[4];
@@ -70,8 +70,7 @@ public class ShapeValidator implements ShapePostProcessor {
         }
         return isSquare;
     }
-    @Override
-    public boolean valid(ShapeType type, Point[] points){
+    public static boolean valid(ShapeType type, Point[] points) throws InvalidShapeException {
         switch (type)
         {
             case LINE:
@@ -81,8 +80,8 @@ public class ShapeValidator implements ShapePostProcessor {
             case SQUARE:
                 return isSquare(points);
             default:
-                LOGGER.error("Unknown Shape, returning false");
-                return false;
+                LOGGER.error("Invalid shape");
+                throw new InvalidShapeException("Invalid shape");
         }
     }
 }
