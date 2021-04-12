@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 public class PointsValidator {
    // private static final Logger LOGGER = LogManager.getLogger(PointsValidator.class);
-    public static boolean pointsValid(ShapeType type, Point[] points) throws InvalidShapeException
+    public boolean pointsValid(ShapeType type, Point[] points) throws InvalidShapeException
     {
         boolean result = false;
         switch (type)

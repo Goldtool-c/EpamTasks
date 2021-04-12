@@ -1,8 +1,7 @@
 package com.epam.jwd.app;
 
 import com.epam.jwd.exception.InvalidShapeException;
-import com.epam.jwd.exception.ShapeDoesNotExistException;
-import com.epam.jwd.factory.ShapeFactory;
+import com.epam.jwd.model.ShapeFactory;
 import com.epam.jwd.model.*;
 import com.epam.jwd.validator.PointsValidator;
 import com.epam.jwd.validator.ShapeValidator;
@@ -14,6 +13,9 @@ import java.util.Scanner;
 public class Main {
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
     public static void main(String[] args){
+        PointsValidator pointsValidator=new PointsValidator();
+        ShapeValidator shapeValidator= new ShapeValidator();
+        ShapeFactory shapeFactory= new ShapeFactory();
         LOGGER.info("Program started");
         Point[] points=new Point[4];
         Shape[] lines = new Line[2];
@@ -23,30 +25,54 @@ public class Main {
         System.out.println("1 -- default\nOther -- set cords");
         Scanner in = new Scanner(System.in);
         way = in.nextInt();
+        Point[] points1=new Point[2];
+        Point[] points2=new Point[3];
+        Point[] points3=new Point[4];
         switch (way)
         {
             case 1:
             {
                 for (int i = 0; i < 2; i++) {
-                    lines[i] = ShapeFactory.createDefaultShape(ShapeType.LINE);
-                    triangles[i] = ShapeFactory.createDefaultShape(ShapeType.TRIANGLE);
+                    lines[i] = shapeFactory.createDefaultShape(ShapeType.LINE,0);
+                    triangles[i] = shapeFactory.createDefaultShape(ShapeType.TRIANGLE,0);
                 }
                 for (int i = 0; i < 4; i++) {
                     points[i]=new Point();
                 }
-                squares[0]=ShapeFactory.createDefaultShape(ShapeType.SQUARE);
+                squares[0]=shapeFactory.createDefaultShape(ShapeType.SQUARE,0);
                 break;
             }
             default:
             {
                 for (int i = 0; i < 2; i++) {
                     System.out.println("Set "+(i+1)+"st line cords");
-                    lines[i] = new Line(1);
+                    for (int j = 0; j < 2; j++) {
+                        Scanner in1 = new Scanner(System.in);
+                        points1[j].setX(in1.nextDouble());
+                        points1[j].setY(in1.nextDouble());
+                    }
+                    lines[i] = shapeFactory.createShape(ShapeType.LINE, points1);
                     System.out.println("Set "+(i+1)+"st triangle cords");
-                    triangles[i] = new Triangle(1);
+                    for (int j = 0; j < 3; j++) {
+                        Scanner in1 = new Scanner(System.in);
+                        points2[j].setX(in1.nextDouble());
+                        points2[j].setY(in1.nextDouble());
+                    }
+                    triangles[i] = shapeFactory.createShape(ShapeType.TRIANGLE, points2);
                 }
                 System.out.println("Set square cords");
-                squares[0]= new Square(1);
+                for (int j = 0; j < 4; j++) {
+                    Scanner in1 = new Scanner(System.in);
+                    points3[j].setX(in1.nextDouble());
+                    points3[j].setY(in1.nextDouble());
+                }
+                for (int i = 0; i < 4; i++) {
+                    System.out.println("Set number of polygon vertexes");
+                    Scanner in1 = new Scanner(System.in);
+                    int temp = in1.nextInt();
+                    shapeFactory.createDefaultShape(ShapeType.POLYGON, temp);
+                }
+                squares[0]= shapeFactory.createShape(ShapeType.SQUARE, points3);
                 break;
             }
 
@@ -59,8 +85,8 @@ public class Main {
         for (int j = 0; j < 2; j++)
         {
             try {
-                PointsValidator.pointsValid(ShapeType.LINE, lines[j].getPoints());
-                ShapeValidator.valid(ShapeType.LINE, lines[j].getPoints());
+                pointsValidator.pointsValid(ShapeType.LINE, lines[j].getPoints());
+                shapeValidator.valid(ShapeType.LINE, lines[j].getPoints());
                 LOGGER.info(lines[j]);
             } catch (InvalidShapeException e) {
              LOGGER.error("Shape "+j+1+" is not a line");
@@ -69,16 +95,16 @@ public class Main {
         for (int j = 0; j < 2; j++)
         {
             try {
-                PointsValidator.pointsValid(ShapeType.TRIANGLE, triangles[j].getPoints());
-                ShapeValidator.valid(ShapeType.TRIANGLE, triangles[j].getPoints());
+                pointsValidator.pointsValid(ShapeType.TRIANGLE, triangles[j].getPoints());
+                shapeValidator.valid(ShapeType.TRIANGLE, triangles[j].getPoints());
                 LOGGER.info(triangles[j]);
             } catch (InvalidShapeException e) {
                 LOGGER.error("Shape "+j+1+" is not a triangle");
             }
         }
         try {
-            PointsValidator.pointsValid(ShapeType.TRIANGLE, squares[0].getPoints());
-            ShapeValidator.valid(ShapeType.TRIANGLE, squares[0].getPoints());
+            pointsValidator.pointsValid(ShapeType.TRIANGLE, squares[0].getPoints());
+            shapeValidator.valid(ShapeType.TRIANGLE, squares[0].getPoints());
             LOGGER.info(squares[0]);
         } catch (InvalidShapeException e) {
             LOGGER.error("Shape "+1+" is not a square");

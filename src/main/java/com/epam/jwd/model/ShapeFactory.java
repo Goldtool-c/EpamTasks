@@ -1,13 +1,14 @@
-package com.epam.jwd.factory;
+package com.epam.jwd.model;
 
-import com.epam.jwd.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Scanner;
 
 public class ShapeFactory {
     private static final Logger LOGGER = LogManager.getLogger(ShapeFactory.class);
 
-    public static Shape createDefaultShape(ShapeType type)
+    public Shape createDefaultShape(ShapeType type, int n)
     {
         Shape shape = null;
         switch (type) {
@@ -26,6 +27,10 @@ public class ShapeFactory {
                 shape=new Square();
                 break;
             }
+            case POLYGON:
+            {
+                shape= new MultiAngleShape(n);
+            }
             default:
             {
                 LOGGER.error("Unknown Shape, returning line(0, 0), (0, 1)");
@@ -35,8 +40,12 @@ public class ShapeFactory {
         }
         return shape;
     }
+
+
+
     public Shape createShape(ShapeType type, Point[] points)
     {
+        Scanner in = new Scanner(System.in);
         Shape shape = null;
         switch (type) {
             case LINE:
@@ -53,6 +62,10 @@ public class ShapeFactory {
             {
                 shape=new Square(points);
                 break;
+            }
+            case POLYGON:
+            {
+                shape = new MultiAngleShape(points, points.length);
             }
             default:
             {

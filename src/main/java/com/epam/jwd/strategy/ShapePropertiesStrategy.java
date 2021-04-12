@@ -1,6 +1,6 @@
 package com.epam.jwd.strategy;
 
-public interface ShapeStrategy {
+public interface ShapePropertiesStrategy {
     double getPerimeter();
     double getSquare();
 }

@@ -1,18 +1,16 @@
 package com.epam.jwd.model;
 
-import com.epam.jwd.strategy.ShapeStrategy;
+import com.epam.jwd.strategy.ShapePropertiesStrategy;
 
-import java.util.Scanner;
-
-public class Triangle extends Shape implements ShapeStrategy {
-    public Triangle(Point[] points1) {
+public class Triangle extends Shape implements ShapePropertiesStrategy {
+    Triangle(Point[] points1) {
         n=3;
         points = new Point[n];
         for (int i = 0; i < n ; i++) {
             points[i]=points1[1];
         }
     }
-    public Triangle()
+    Triangle()
     {
         n=3;
         points = new Point[n];
@@ -20,26 +18,16 @@ public class Triangle extends Shape implements ShapeStrategy {
         points[1] = new Point(0,1);
         points[2] = new Point(1,0);
     }
-    public Triangle(int a)
-    {
-        n=3;
-        int x,y;
-        for (int i = 0; i < n ; i++) {
-            Scanner in = new Scanner(System.in);
-            x = in.nextInt();
-            y = in.nextInt();
-            this.setPoint(i, x, y);
-        }
-
-    }
-
-    @Override
-    public double getPerimeter() {
-        return 0;
-    }
 
     @Override
     public double getSquare() {
-        return 0;
+        double p = this.getPerimeter()/2;
+        double[] a= new double[3];
+        for (int i = 1; i < 3; i++) {
+            a[i]=this.getLineLength(points[i], points[i-1]);
+        }
+        a[0]=this.getLineLength(points[0], points[points.length-1]);
+        double square = Math.pow(p*(p-a[0])*(p-a[1])*(p-a[2]), 0.5);
+        return square;
     }
 }

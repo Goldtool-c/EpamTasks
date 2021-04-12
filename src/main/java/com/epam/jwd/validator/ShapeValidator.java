@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 public class ShapeValidator{
     private static final Logger LOGGER = LogManager.getLogger(ShapeValidator.class);
-    private static boolean isLine(Point[] points)
+    private boolean isLine(Point[] points)
     {
         boolean isLine=true;
         if(points[0].equals(points[1]))
@@ -18,7 +18,7 @@ public class ShapeValidator{
         }
         return isLine;
     }
-    private static boolean isTriangle(Point[] points)
+    private boolean isTriangle(Point[] points)
     {
         boolean isTriangle=true;
         double k, b;
@@ -32,7 +32,7 @@ public class ShapeValidator{
         }
         return isTriangle;
     }
-    private static boolean isSquare(Point[] points)
+    private boolean isSquare(Point[] points)
     {
         boolean isSquare = false;
         boolean[] squares = new boolean[4];
@@ -70,7 +70,7 @@ public class ShapeValidator{
         }
         return isSquare;
     }
-    public static boolean valid(ShapeType type, Point[] points) throws InvalidShapeException {
+    public boolean valid(ShapeType type, Point[] points) throws InvalidShapeException {
         switch (type)
         {
             case LINE:
@@ -79,6 +79,8 @@ public class ShapeValidator{
                 return isTriangle(points);
             case SQUARE:
                 return isSquare(points);
+            case POLYGON:
+                return true;
             default:
                 LOGGER.error("Invalid shape");
                 throw new InvalidShapeException("Invalid shape");
