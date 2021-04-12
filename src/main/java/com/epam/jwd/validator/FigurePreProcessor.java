@@ -6,7 +6,8 @@ import com.epam.jwd.model.ShapeType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class PointsValidator {
+public enum  FigurePreProcessor implements  ShapePreProcessor {
+    GENERAL;
    // private static final Logger LOGGER = LogManager.getLogger(PointsValidator.class);
     public boolean pointsValid(ShapeType type, Point[] points) throws InvalidShapeException
     {

@@ -7,8 +7,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
-public class ShapeValidator{
-    private static final Logger LOGGER = LogManager.getLogger(ShapeValidator.class);
+public enum FigurePostProcessor implements ShapePostProcessor{
+    GENERAL;
+    private static final Logger LOGGER = LogManager.getLogger(FigurePostProcessor.class);
     private boolean isLine(Point[] points)
     {
         boolean isLine=true;

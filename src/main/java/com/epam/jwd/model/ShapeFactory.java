@@ -5,7 +5,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Scanner;
 
-public class ShapeFactory {
+public enum ShapeFactory {
+    GENERAL;
     private static final Logger LOGGER = LogManager.getLogger(ShapeFactory.class);
 
     public Shape createDefaultShape(ShapeType type, int n)
