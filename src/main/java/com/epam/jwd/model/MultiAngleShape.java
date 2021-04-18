@@ -5,9 +5,9 @@ public class MultiAngleShape extends Shape{
     MultiAngleShape(int n)
     {
         this.points = new Point[n];
+        points[0]=new Point(0,0);
         for (int i = 1; i < n; i++) {
-            this.points[i].setX(this.points[i-1].getX()-((double) n/10));
-            this.points[i].setY(this.points[i-1].getY()-((double) n/5));
+            points[i]= new Point(this.points[i-1].getX()-((double) n/10), this.points[i-1].getY()-((double) n/5));
         }
     }
     public MultiAngleShape(Point[] points, int n)
