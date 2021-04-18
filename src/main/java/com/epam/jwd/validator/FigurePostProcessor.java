@@ -71,6 +71,25 @@ public enum FigurePostProcessor implements ShapePostProcessor{
         }
         return isSquare;
     }
+    public boolean isPolygon(Point[] points)
+    {
+        int i=0;
+        int j=0;
+        while (i<points.length)
+        {
+            j=0;
+            while (j<points.length)
+            {
+                if(i!=j&&points[i].equals(points[j]))
+                {
+                    return false;
+                }
+                j++;
+            }
+            i++;
+        }
+        return true;
+    }
     public boolean valid(ShapeType type, Point[] points) throws InvalidShapeException {
         switch (type)
         {

@@ -1,7 +1,7 @@
 package com.epam.jwd.app;
 
 import com.epam.jwd.exception.InvalidShapeException;
-import com.epam.jwd.model.ShapeFactory;
+import com.epam.jwd.model.SimpleShapeFactory;
 import com.epam.jwd.model.*;
 import com.epam.jwd.validator.FigurePreProcessor;
 import com.epam.jwd.validator.FigurePostProcessor;
@@ -25,55 +25,20 @@ public class Main {
         Point[] points1=new Point[2];
         Point[] points2=new Point[3];
         Point[] points3=new Point[4];
-        switch (way)
-        {
-            case 1:
-            {
-                for (int i = 0; i < 2; i++) {
-                    lines[i] = ShapeFactory.GENERAL.createDefaultShape(ShapeType.LINE,0);
-                    triangles[i] = ShapeFactory.GENERAL.createDefaultShape(ShapeType.TRIANGLE,0);
-                }
-                for (int i = 0; i < 4; i++) {
-                    points[i]=new Point();
-                }
-                squares[0]=ShapeFactory.GENERAL.createDefaultShape(ShapeType.SQUARE,0);
-                break;
-            }
-            default:
-            {
-                for (int i = 0; i < 2; i++) {
-                    System.out.println("Set "+(i+1)+"st line cords");
-                    for (int j = 0; j < 2; j++) {
-                        Scanner in1 = new Scanner(System.in);
-                        points1[j].setX(in1.nextDouble());
-                        points1[j].setY(in1.nextDouble());
-                    }
-                    lines[i] = ShapeFactory.GENERAL.createShape(ShapeType.LINE, points1);
-                    System.out.println("Set "+(i+1)+"st triangle cords");
-                    for (int j = 0; j < 3; j++) {
-                        Scanner in1 = new Scanner(System.in);
-                        points2[j].setX(in1.nextDouble());
-                        points2[j].setY(in1.nextDouble());
-                    }
-                    triangles[i] = ShapeFactory.GENERAL.createShape(ShapeType.TRIANGLE, points2);
-                }
-                System.out.println("Set square cords");
-                for (int j = 0; j < 4; j++) {
-                    Scanner in1 = new Scanner(System.in);
-                    points3[j].setX(in1.nextDouble());
-                    points3[j].setY(in1.nextDouble());
-                }
-                for (int i = 0; i < 4; i++) {
-                    System.out.println("Set number of polygon vertexes");
-                    Scanner in1 = new Scanner(System.in);
-                    int temp = in1.nextInt();
-                    ShapeFactory.GENERAL.createDefaultShape(ShapeType.POLYGON, temp);
-                }
-                squares[0]= ShapeFactory.GENERAL.createShape(ShapeType.SQUARE, points3);
-                break;
-            }
 
+        for (int i = 0; i < 2; i++) {
+            lines[i] = SimpleShapeFactory.GENERAL.createDefaultShape(ShapeType.LINE,0);
+            triangles[i] = SimpleShapeFactory.GENERAL.createDefaultShape(ShapeType.TRIANGLE,0);
         }
+        for (int i = 0; i < 4; i++) {
+            points[i]=new Point();
+        }
+        squares[0]= SimpleShapeFactory.GENERAL.createDefaultShape(ShapeType.SQUARE,0);
+
+        System.out.println("Set number of polygon vertexes");
+        Scanner in1 = new Scanner(System.in);
+        int temp = in1.nextInt();
+        SimpleShapeFactory.GENERAL.createDefaultShape(ShapeType.POLYGON, temp);
         int i=0;
         do {
             LOGGER.info(i+1+"st point:"+points[i]);

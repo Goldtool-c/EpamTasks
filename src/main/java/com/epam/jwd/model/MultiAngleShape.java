@@ -10,14 +10,14 @@ public class MultiAngleShape extends Shape{
             this.points[i].setY(this.points[i-1].getY()-((double) n/5));
         }
     }
-    MultiAngleShape(Point[] points, int n)
+    public MultiAngleShape(Point[] points, int n)
     {
         for (int i = 0; i < n; i++) {
             this.points[i]=points[i];
         }
     }
     @Override
-    public double getSquare()//only for simple multiAngles
+    public double getSquare()//only for simple polygons
     {
         double sum1=0, sum2=0;
         for (int i = 0; i <points.length-1 ; i++) {

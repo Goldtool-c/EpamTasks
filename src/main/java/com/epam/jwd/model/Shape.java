@@ -38,12 +38,6 @@ public class Shape implements ShapePropertiesStrategy{
         double k2 = point2.getX()*point2.getX()+point2.getY()+point2.getY();
         return Math.pow(k1+k2,0.5);
     }
-    public static void printShapes(Shape[] shapes)
-    {
-        for (int j = 0; j < shapes.length; j++) {
-                LOGGER.info(j+1+"st "+shapes[j].getClass().getSimpleName()+": "+shapes[j]);
-        }
-    }
 
     @Override
     public double getPerimeter() {

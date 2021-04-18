@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 public enum  FigurePreProcessor implements  ShapePreProcessor {
     GENERAL;
-   // private static final Logger LOGGER = LogManager.getLogger(PointsValidator.class);
+    private static final Logger LOGGER = LogManager.getLogger(FigurePreProcessor.class);
     public boolean pointsValid(ShapeType type, Point[] points) throws InvalidShapeException
     {
         boolean result = false;
@@ -26,8 +26,12 @@ public enum  FigurePreProcessor implements  ShapePreProcessor {
             if(points.length==3)
                 result=true;
             break;
+            case POLYGON:
+                if(points.length>2)
+                    result=true;
+                break;
             default:
-     //           LOGGER.error("Invalid number of points");
+                LOGGER.error("Invalid number of points");
                 throw new InvalidShapeException("Invalid number of points");
         }
         return result;
