@@ -12,6 +12,7 @@ public class Shape implements ShapePropertiesStrategy{
     {
         return points[n];
     }
+    public int getN(){ return this.n; }
     public int getId(){ return this.id;}
     public Point[] getPoints()
     {
@@ -30,10 +31,9 @@ public class Shape implements ShapePropertiesStrategy{
         str[n-1]="Id: "+id+" || "+this.getClass().getSimpleName()+": "+points[i]+", "+str[n-2];
         return str[n-1];
     }
-    public void setPoint(int n, double x, double y)
+    public void setPoint(int n, Point point)
     {
-        points[n].setX(x);
-        points[n].setY(y);
+        points[n]=point;
     }
     public double getLineLength(Point point1, Point point2)
     {

@@ -2,9 +2,8 @@ package com.epam.jwd.service.impl;
 
 import com.epam.jwd.app.Main;
 import com.epam.jwd.exception.ShapeNotFoundException;
-import com.epam.jwd.model.Shape;
-import com.epam.jwd.model.ShapeType;
-import com.epam.jwd.model.SimpleShapeFactory;
+import com.epam.jwd.exception.UnknownParameterException;
+import com.epam.jwd.model.*;
 import com.epam.jwd.repository.ShapeStorage;
 import com.epam.jwd.service.ShapeCrud;
 import org.apache.logging.log4j.LogManager;
@@ -52,12 +51,72 @@ public class ShapeCrudImpl implements ShapeCrud {
     }
 
     @Override
+    public <T> Shape find(ShapeParameterType type, T parameter) throws UnknownParameterException, ShapeNotFoundException {
+        Shape shape=null;
+        for (int i = 0; i < ShapeStorage.GENERAL.getLength(); i++) {
+            switch (type)
+            {
+                case SQUARE:
+                {
+                    if(parameter.equals(ShapeStorage.GENERAL.get(i).getSquare()))
+                    {
+                        shape=ShapeStorage.GENERAL.get(i);
+                    }
+                    break;
+                }
+                case ID:
+                {
+                    if(parameter.equals(ShapeStorage.GENERAL.get(i).getId()))
+                    {
+                        shape=ShapeStorage.GENERAL.get(i);
+                    }
+                    break;
+                }
+                case POINT:
+                {
+                    for (int j = 0; j < ShapeStorage.GENERAL.get(i).getN(); j++) {
+                        if (parameter.equals(ShapeStorage.GENERAL.get(i).getPoint(j))) {
+                            shape = ShapeStorage.GENERAL.get(i);
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case VERTEX:
+                {
+                    if(parameter.equals(ShapeStorage.GENERAL.get(i).getN()))
+                    {
+                        shape=ShapeStorage.GENERAL.get(i);
+                    }
+                    break;
+                }
+                case PERIMETER:
+                {
+                    if(parameter.equals(ShapeStorage.GENERAL.get(i).getPerimeter()))
+                    {
+                        shape=ShapeStorage.GENERAL.get(i);
+                    }
+                    break;
+                }
+                default:
+                {
+                    LOGGER.error("Unknown Parameter "+type);
+                    throw new UnknownParameterException("Unknown parameter "+type);
+                }
+            }
+            if(shape!=null){break;}
+        }
+        if(shape==null){LOGGER.error("Shape with "+type+"="+parameter+" is not found");throw new ShapeNotFoundException("Shape with "+type+"="+parameter+" is not found");}
+        return shape;
+    }
+
+    @Override
     public ArrayList<Shape> findAll()
     {
         return ShapeStorage.GENERAL.getAll();
     }
     @Override
-    public Shape update() {
-        return null;
+    public void update(Shape shape, Point point, int n) {
+        shape.setPoint(n, point);
     }
 }
