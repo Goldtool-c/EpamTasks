@@ -6,11 +6,13 @@ import org.apache.logging.log4j.Logger;
 public class Shape implements ShapePropertiesStrategy{
     protected Point[] points;
     protected int n;
+    protected int id;
     protected static final Logger LOGGER = LogManager.getLogger(Shape.class);
     public Point getPoint(int n)
     {
         return points[n];
     }
+    public int getId(){ return this.id;}
     public Point[] getPoints()
     {
         return points;
@@ -20,11 +22,12 @@ public class Shape implements ShapePropertiesStrategy{
         String[] str = new String[n];
         int i=1;
         str[0] = points[i].toString()+", ";
-        while(i<n)
+        while(i<n-1)
         {
             str[i]=points[i].toString()+", "+str[i-1];
             i++;
         }
+        str[n-1]="Id: "+id+" || "+this.getClass().getSimpleName()+": "+points[i]+", "+str[n-2];
         return str[n-1];
     }
     public void setPoint(int n, double x, double y)

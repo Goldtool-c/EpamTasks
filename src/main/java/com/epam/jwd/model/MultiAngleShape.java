@@ -2,16 +2,18 @@ package com.epam.jwd.model;
 
 public class MultiAngleShape extends Shape{
 
-    MultiAngleShape(int n)
+    MultiAngleShape(int n, int id)
     {
+        this.id=id;
         this.points = new Point[n];
         points[0]=new Point(0,0);
         for (int i = 1; i < n; i++) {
             points[i]= new Point(this.points[i-1].getX()-((double) n/10), this.points[i-1].getY()-((double) n/5));
         }
     }
-    public MultiAngleShape(Point[] points, int n)
+    public MultiAngleShape(Point[] points, int n, int id)
     {
+        this.id=id;
         for (int i = 0; i < n; i++) {
             this.points[i]=points[i];
         }

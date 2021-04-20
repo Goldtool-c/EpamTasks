@@ -1,7 +1,8 @@
 package com.epam.jwd.model;
 
 public class Line extends Shape  {
-    public Line(Point[] points1) {
+    public Line(Point[] points1, int id) {
+        this.id=id;
         n = 2;
         points = new Point[n];
         for (int i = 0; i < n; i++) {
@@ -9,7 +10,8 @@ public class Line extends Shape  {
         }
     }
 
-    Line() {
+    Line(int id) {
+        this.id=id;
         n = 2;
         points = new Point[n];
         points[0] = new Point(0, 0);

@@ -3,6 +3,7 @@ package com.epam.jwd.app;
 import com.epam.jwd.exception.InvalidShapeException;
 import com.epam.jwd.model.SimpleShapeFactory;
 import com.epam.jwd.model.*;
+import com.epam.jwd.repository.ShapeStorage;
 import com.epam.jwd.validator.FigurePreProcessor;
 import com.epam.jwd.validator.FigurePostProcessor;
 import org.apache.logging.log4j.LogManager;

@@ -4,15 +4,17 @@ import com.epam.jwd.strategy.ShapePropertiesStrategy;
 
 public class Square extends Shape implements ShapePropertiesStrategy {
 
-    public Square(Point[] points1) {
+    public Square(Point[] points1, int id) {
+        this.id=id;
         n=4;
         points = new Point[n];
         for (int i = 0; i < n ; i++) {
             points[i]=points1[1];
         }
     }
-    Square()
+    Square(int id)
     {
+        this.id=id;
         n=4;
         points = new Point[n];
         points[0]=new Point(0,0);

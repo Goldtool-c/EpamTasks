@@ -3,15 +3,17 @@ package com.epam.jwd.model;
 import com.epam.jwd.strategy.ShapePropertiesStrategy;
 
 public class Triangle extends Shape implements ShapePropertiesStrategy {
-    public Triangle(Point[] points1) {
+    public Triangle(Point[] points1, int id) {
         n=3;
+        this.id=id;
         points = new Point[n];
         for (int i = 0; i < n ; i++) {
             points[i]=points1[1];
         }
     }
-    Triangle()
+    Triangle(int id)
     {
+        this.id=id;
         n=3;
         points = new Point[n];
         points[0] = new Point(0,0);
